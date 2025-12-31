@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIMPLE PAGE</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+  <div class="hero-container">
+    <div class="slider" style="--total:10">
+      <div class="card" style="--index:1"><img src="img/image1.jpg"></div>
+      <div class="card" style="--index:2"><img src="img/image2.jpg"></div>
+      <div class="card" style="--index:3"><img src="img/image3.jpg"></div>
+      <div class="card" style="--index:4"><img src="img/image4.jpg"></div>
+      <div class="card" style="--index:5"><img src="img/image5.jpg"></div>
+      <div class="card" style="--index:6"><img src="img/image6.jpg"></div>
+      <div class="card" style="--index:7"><img src="img/image7.jpg"></div>
+      <div class="card" style="--index:8"><img src="img/image8.jpg"></div>
+      <div class="card" style="--index:9"><img src="img/image9.jpg"></div>
+      <div class="card" style="--index:10"><img src="img/image10.jpg"></div>
+
+    </div>
+  </div>
+  <div id="balloons"></div>
+
+  <script>
+    const balloonEmojis = ["🎈", "🎉", "🎁", "🍰", "💖"];
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+      balloon.innerText = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
+      balloon.style.left = Math.random() * window.innerWidth + 'px';
+      balloon.style.color = `hsl(${Math.random() * 360},80%,60%)`;
+      const duration = 5 + Math.random() * 5;
+      balloon.style.animation = `balloonFloat ${duration}s ease-in forwards`;
+      balloonsContainer.appendChild(balloon);
+      setTimeout(() => balloon.remove(), duration * 1000);
+    }
+    setInterval(createBalloon, 700);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GREETING PAGE</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="turn.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            display: grid;
+            place-content: center;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background-image: url(./img/img4.jpg);
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 40px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        @keyframes balloonFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-300px) rotate(15deg);
+            }
+
+            100% {
+                transform: translateY(-600px) rotate(-15deg);
+            }
+        }
+
+        .flipbook {
+            width: 600px;
+            height: 400px;
+        }
+
+        @media(max-width:768px) {
+            .container {
+                max-width: 100%;
+                padding: 10px;
+            }
+        }
+
+        @media(max-width:480px) {
+            .container {
+                max-width: 100%;
+            }
+        }
+
+        .flipbook .heard {
+            background: #f16a8c !important;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            font-size: 30px;
+            font-style: italic;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .flipbook .heard small {
+            font-style: italic;
+            font-weight: lighter;
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        .flipbook .page {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border: 5px solid rgba(0, 0, 0, .11);
+            border-radius: 10px;
+
+        }
+
+        .page img {
+            width: 70%;
+            object-fit: cover;
+            margin: auto;
+             inset: 0;
+        }
+
+        .flipbook .page small {
+            font-size: 14px;
+            margin-bottom: 10px;
+            margin-left: 50px;
+            margin-right: 60px;
+
+        }
+
+        a.button {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            padding: 14px 30px;
+            background-color: #f86db9;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: 0.3s ease;
+        }
+
+        a.button:hover {
+            background-color: #ee80c4;
+            transform: translateX(-50%) translateY(-3px)
+        }
+
+        /* a.button:active {
+            transform: translateY(0);
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="balloons">
+        <div class="flipbook">
+            <div class="heard">Open Your </br>New Year</br> Greeting Card!
+                <div class="message" id="message"></div>
+            </div>
+            <div class="heard"></div>
+            <div>
+                <small>Wishing you a Happy New Year!</small>
+                <small>🎉✨ May it bring joy, success, and good health, with lots of smiles and new opportunities ahead.
+                    🌟😊</small>
+            </div>
+            <div>
+                <img src="./img/img6.jpg" alt="">
+                <!-- <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.</small> -->
+            </div>
+            <div>
+                <!-- <img src="./img/img7.jpg" alt=""> -->
+                <small>I couldn't imagine going into another </br> year without you by my side.</br> May your 2026 be as bright and wonderful</br> as the light you bring into my life.</br> Here’s to more memories, more laughs, and </br>more adventures together!</small>
+            </div>
+            <div>
+                <img src="./img/img7.jpg" alt="">
+                <!-- <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.</small> -->
+            </div>
+            <div>
+                <!-- <img src="./img/img9.jpeg" alt=""> -->
+                <small>My New Year’s resolution is to stop </br>hanging out with people who ask me about</br> my New Year’s resolutions. </br>(That doesn't include you... yet!) </br>Let's make 2026 the year we actually do half </br>the things we say we’re going to do</small>
+            </div>
+            <div class="heard"></div>
+            <!-- <div class="heard"></div> -->
+
+
+
+        </div>
+        <a href="page.htm" class="button">Click Me</a>
+    </div>
+    <script>
+        const balloonsContainer = document.getElementById('balloons');
+        const balloonEmojis = ["🎈", "🎉", "🎁", "💖"];
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.innerText = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
+            balloon.style.left = Math.random() * window.innerWidth + 'px';
+            balloon.style.color = `hsl(${Math.random() * 360},80%,60%)`;
+            const duration = 5 + Math.random() * 5;
+            balloon.style.animation = `balloonFloat ${duration}s ease-in forwards`;
+            balloonsContainer.appendChild(balloon);
+            setTimeout(() => balloon.remove(), duration * 1000);
+        }
+        setInterval(createBalloon, 700);
+
+        $(".flipbook").turn();
+    </script>
+</body>
+
+</html>
